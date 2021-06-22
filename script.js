@@ -1,7 +1,8 @@
 
 function init(){
 	canvas = document.getElementById('mycanvas');
-	W = H = canvas.width = canvas.height = 1000;
+	W = canvas.width = 1960;
+    H = canvas.height = 919;
 	pen = canvas.getContext('2d');
 	cs = 66;
 	game_over = false;
@@ -164,6 +165,7 @@ function gameloop(){
 init();
 
 var f = setInterval(gameloop,100);
+
 
 
 
