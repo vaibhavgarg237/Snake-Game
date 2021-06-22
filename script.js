@@ -1,14 +1,11 @@
 
-
-
-
 function init(){
 	canvas = document.getElementById('mycanvas');
 	W = H = canvas.width = canvas.height = 1000;
 	pen = canvas.getContext('2d');
 	cs = 66;
 	game_over = false;
-	score = 5;
+	score = 0;
 
 
 	//Create a Image Object for food
