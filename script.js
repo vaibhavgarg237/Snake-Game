@@ -1,4 +1,4 @@
-
+//Step 1. Initialisation
 function init(){
 	canvas = document.getElementById('mycanvas');
 	W = canvas.width = 1290;
@@ -8,13 +8,14 @@ function init(){
 	game_over = false;
 	score = 0;
 
-	//Create a Image Object for food
+	//Create a Image Object for Food and Trophy( Scoreboard )
 	food_img = new Image();
 	food_img.src = "Assets/apple.png";
-
+	
 	trophy = new Image();
 	trophy.src = "Assets/trophy.png";
 
+	//Obj for random food -> x,y,color ( x and y coord for random food,color )
 	food = getRandomFood();
 
 	snake = {
@@ -23,12 +24,12 @@ function init(){
 		cells:[],
 		direction:"right",
 
-
 		createSnake:function(){
 			for(var i=this.init_len;i>0;i--){
 				this.cells.push({x:i,y:0});
 			}
 		},
+
 		drawSnake:function(){
 			for(var i=0;i<this.cells.length;i++){
 				pen.fillStyle = this.color;
@@ -52,8 +53,8 @@ function init(){
 				this.cells.pop();
 			}
 			
+			//Response for Key Pressed
 			var nextX,nextY;
-
 			if(this.direction=="right"){
 				nextX = headX + 1;
 				nextY = headY;
@@ -73,7 +74,7 @@ function init(){
 
 			this.cells.unshift({x: nextX,y:nextY});
 
-			/*Write a Logic that prevents snake from going out*/
+			// Boundary Conditions: Prevents snake from going out
 			var last_x = Math.round(W/cs);
 			var last_y = Math.round(H/cs);
 
@@ -109,18 +110,19 @@ function init(){
 function draw(){
 	//console.log("In Draw");
 
-	//erase the old frame
+	//Draw Snake : erase the old frame and draw new updated snake
 	pen.clearRect(0,0,W,H);
 	snake.drawSnake();
 
+	//Draw Food
 	pen.fillStyle = food.color;
 	pen.drawImage(food_img,food.x*cs,food.y*cs,cs,cs);
 
+	//Draw Scoreboard (Trophy)
 	pen.drawImage(trophy,18,20,cs,cs);
 	pen.fillStyle = "blue";
 	pen.font = "20px Roboto"
 	pen.fillText(score,50,50);
-
 	
 }
 
@@ -129,6 +131,7 @@ function update(){
 	snake.updateSnake(); 
 }
 
+//Called in Init, Generate random food coordinatea
 function getRandomFood(){
 
 	var foodX = Math.round(Math.random()*(W-cs)/cs);
@@ -140,7 +143,6 @@ function getRandomFood(){
 		color:"red",
 	}
 	return food
-
 }
 
 function gameloop(){
@@ -153,8 +155,9 @@ function gameloop(){
 	update();
 }
 
+//Step 1.
 init();
-
+//Step 2. Run gameloop for every 200
 var f = setInterval(gameloop,200);
 
 
