@@ -2,12 +2,11 @@
 function init(){
 	canvas = document.getElementById('mycanvas');
 	W = canvas.width = 1290;
-    H = canvas.height = 592;
+	H = canvas.height = 592;
 	pen = canvas.getContext('2d');
 	cs = 66;
 	game_over = false;
 	score = 0;
-
 
 	//Create a Image Object for food
 	food_img = new Image();
@@ -31,7 +30,6 @@ function init(){
 			}
 		},
 		drawSnake:function(){
-
 			for(var i=0;i<this.cells.length;i++){
 				pen.fillStyle = this.color;
 				pen.fillRect(this.cells[i].x*cs,this.cells[i].y*cs,cs-3,cs-3);
@@ -49,13 +47,10 @@ function init(){
 				console.log("Food eaten");
 				food = getRandomFood();
 				score++;
-
 			}
-			else
-			{
+			else{
 				this.cells.pop();
 			}
-
 			
 			var nextX,nextY;
 
@@ -85,9 +80,7 @@ function init(){
 			if(this.cells[0].y<0 || this.cells[0].x < 0 || this.cells[0].x > last_x || this.cells[0].y > last_y){
 				game_over = true;
 			}
-
 		}
-
 	};
 
 	snake.createSnake();
@@ -109,11 +102,9 @@ function init(){
 		console.log(snake.direction);
 	}
 
-
 	document.addEventListener('keydown',keyPressed) ;
 	
 }
-
 
 function draw(){
 	//console.log("In Draw");
@@ -165,15 +156,5 @@ function gameloop(){
 init();
 
 var f = setInterval(gameloop,200);
-
-
-
-
-
-
-
-
-
-
 
 
